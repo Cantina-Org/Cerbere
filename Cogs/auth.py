@@ -1,5 +1,5 @@
 from datetime import datetime
-from Utils.Utils import salt_password, make_log
+from Utils.Utils import hash_password, make_log
 from flask import render_template, redirect, url_for, make_response
 
 
@@ -7,7 +7,7 @@ def auth_cogs(ctx, database):
     if ctx.method == 'POST':
         user = ctx.form['nm']
         try:
-            passwd = salt_password(ctx.form['passwd'], user, database, ctx)
+            passwd = hash_password(ctx.form['passwd'])
             row = database.select(f'''SELECT user_name, password, token FROM cantina_administration.user WHERE password = %s AND user_name = %s''', (passwd, user), 1)
         except Exception as e:
             return 'userNotFound: ' + str(e)
