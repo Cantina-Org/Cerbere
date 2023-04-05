@@ -12,6 +12,7 @@ config_data = load(conf_file)
 # Connection aux bases de données
 database = DataBase(user=config_data['database'][0]['database_username'],
                     password=config_data['database'][0]['database_password'], host="localhost", port=3306)
+database.connection()
 
 
 @app.route('/')
