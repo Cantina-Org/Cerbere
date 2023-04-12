@@ -7,9 +7,6 @@ ph = PasswordHasher()
 
 
 def auth_cogs(ctx, database, url_to_redirect):
-    if not url_to_redirect:
-        return 'Erreur: une URL de redirection doit être fournis!'
-    
     if ctx.method == 'POST':
         user = ctx.form['nm']
         try:
@@ -22,7 +19,11 @@ def auth_cogs(ctx, database, url_to_redirect):
         try:
             if login:
                 make_log(action_name='login', user_ip=ctx.remote_addr, user_token=row[1], log_level=1, database=database)
-                resp = make_response(redirect(url_for('home')))
+                if not url_to_redirect:
+                    resp = make_response(redirect(url_for('my_account')))
+                else:
+                    resp = make_response(redirect(url_for('home')))
+
                 resp.set_cookie('userID', row[1], domain='')
                 database.insert('''UPDATE cantina_administration.user SET last_online=%s WHERE token=%s''',
                                 (datetime.now(), row[1]))

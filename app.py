@@ -22,6 +22,7 @@ def home():
 
 
 @app.route('/auth/<url_to_redirect>', methods=['GET', 'POST'])
+@app.route('/auth/', methods=['GET', 'POST'])
 def auth(url_to_redirect=None):
     return auth_cogs(request, database, url_to_redirect)
 
