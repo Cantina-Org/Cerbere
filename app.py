@@ -20,9 +20,14 @@ def home():
     return home_cogs()
 
 
-@app.route('/auth', methods=['GET', 'POST'])
-def auth():
-    return auth_cogs(request, database)
+@app.route('/auth/<url_to_redirect>', methods=['GET', 'POST'])
+def auth(url_to_redirect=None):
+    return auth_cogs(request, database, url_to_redirect)
+
+
+@app.route('/account/my', methods=['GET', 'POST'])
+def my_account():
+    return auth_cogs()
 
 
 if __name__ == '__main__':

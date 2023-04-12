@@ -1,12 +1,15 @@
 from datetime import datetime
-from Utils.Utils import hash_password, verify_hash_password, make_log
+from Utils.Utils import verify_hash_password, make_log
 from flask import render_template, redirect, url_for, make_response
 from argon2 import PasswordHasher
 
 ph = PasswordHasher()
 
 
-def auth_cogs(ctx, database):
+def auth_cogs(ctx, database, url_to_redirect):
+    if not url_to_redirect:
+        return 'Erreur: une URL de redirection doit être fournis!'
+    
     if ctx.method == 'POST':
         user = ctx.form['nm']
         try:
