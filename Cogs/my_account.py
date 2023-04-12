@@ -7,4 +7,4 @@ ph = PasswordHasher()
 
 
 def auth_cogs(ctx, database):
-    database.select('''SELECT''')
+    database.select('''SELECT * FROM ''')
