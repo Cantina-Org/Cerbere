@@ -6,5 +6,6 @@ from argon2 import PasswordHasher
 ph = PasswordHasher()
 
 
-def auth_cogs(ctx, database):
-    database.select('''SELECT * FROM ''')
+def my_account_cogs(ctx, database):
+    data = database.select('''SELECT * FROM cantina_administration.user WHERE token=%s''', (ctx.cookies.get('userID')), 1)
+    return data

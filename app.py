@@ -3,6 +3,7 @@ from os import path, getcwd
 from flask import Flask, request
 from Cogs.auth import auth_cogs
 from Cogs.home import home_cogs
+from Cogs.my_account import my_account_cogs
 from Utils.Database import DataBase
 
 app = Flask(__name__)
@@ -27,7 +28,7 @@ def auth(url_to_redirect=None):
 
 @app.route('/account/my', methods=['GET', 'POST'])
 def my_account():
-    return auth_cogs()
+    return my_account_cogs(request, database)
 
 
 if __name__ == '__main__':
