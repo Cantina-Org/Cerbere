@@ -6,7 +6,7 @@ from argon2 import PasswordHasher
 ph = PasswordHasher()
 
 
-def auth_cogs(ctx, database, url_to_redirect):
+def auth_cogs(ctx, database, url_to_redirect, domain):
     if ctx.method == 'POST':
         user = ctx.form['nm']
         try:
@@ -24,7 +24,7 @@ def auth_cogs(ctx, database, url_to_redirect):
                 else:
                     resp = make_response(redirect(url_for('home')))
 
-                resp.set_cookie('userID', row[1], domain='')
+                resp.set_cookie('userID', row[1], domain=domain)
                 database.insert('''UPDATE cantina_administration.user SET last_online=%s WHERE token=%s''',
                                 (datetime.now(), row[1]))
                 return resp
