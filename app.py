@@ -33,4 +33,4 @@ def my_account():
 
 
 if __name__ == '__main__':
-    app.run(port=2000)
+    app.run(port=config_data["port"])
