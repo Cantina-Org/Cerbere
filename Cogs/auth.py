@@ -1,12 +1,12 @@
 from datetime import datetime
-from Utils.Utils import hash_password, verify_hash_password, make_log
+from Utils.Utils import verify_hash_password, make_log
 from flask import render_template, redirect, url_for, make_response
 from argon2 import PasswordHasher
 
 ph = PasswordHasher()
 
 
-def auth_cogs(ctx, database):
+def auth_cogs(ctx, database, url_to_redirect):
     if ctx.method == 'POST':
         user = ctx.form['nm']
         try:
@@ -19,8 +19,14 @@ def auth_cogs(ctx, database):
         try:
             if login:
                 make_log(action_name='login', user_ip=ctx.remote_addr, user_token=row[1], log_level=1, database=database)
-                resp = make_response(redirect(url_for('home')))
-                resp.set_cookie('userID', row[1])
+                if not url_to_redirect:
+                    resp = make_response(redirect(url_for('my_account')))
+                else:
+                    resp = make_response(redirect(url_for('home')))
+
+                domain = database.select("SELECT fqdn FROM cantina_administration.domain WHERE name='main'")
+                print(domain[0][0])
+                resp.set_cookie('userID', row[1], domain=domain[0][0])
                 database.insert('''UPDATE cantina_administration.user SET last_online=%s WHERE token=%s''',
                                 (datetime.now(), row[1]))
                 return resp
