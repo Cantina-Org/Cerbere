@@ -8,17 +8,17 @@
 </head>
 <body class="has-text-centered">
     <h1 class="is-size-1">Cantina - Mon Compte</h1><br>
-    <div class="columns is-vcentered is-centered">
+    <div class="is-vcentered is-centered">
         <div id="main">
-            <h1 class="is-size-3">Principale</h1>
+            <h1 class="is-size-3 is-underlined">Principale</h1>
             <p class="is-size-5">
                 Nom d'utilisateur: {{ data[2] }}<br>
                 Mots de passe: <button class="button">Modifier le mots de passe</button><br>
                 Permission d'administrateur: {% if data[5] == 1 %}Oui{% else %}Non{% endif %}<br>
             </p>
-        </div>
+        </div> <br>
         <div id="nephelees">
-            <h1 class="is-size-3">Néphélées</h1><br>
+            <h1 class="is-size-3 is-underlined">Néphélées</h1><br>
             <p class="is-size-5">
                 Nom d'utilisateur: {{ data[6] }}<br>
             </p>
