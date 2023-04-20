@@ -7,7 +7,7 @@ def my_account_cogs(ctx, database):
         return redirect(url_for('auth'))
 
     user_data = database.select('''SELECT * FROM cantina_administration.user WHERE token=%s''',
-                                (ctx.cookies.get('userID')), 1)
+                                (ctx.cookies.get('token')), 1)
     messsage_data = database.select('''SELECT * FROM cantina_hermes.data WHERE token=%s''', (ctx.cookies.get('userID'))
                                     , 1)
     try:

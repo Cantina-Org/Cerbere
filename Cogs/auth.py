@@ -22,11 +22,12 @@ def auth_cogs(ctx, database, url_to_redirect):
                 if not url_to_redirect:
                     resp = make_response(redirect(url_for('my_account')))
                 else:
-                    resp = make_response(redirect(url_for('home')))
+                    data = database.select('SELECT fqdn FROM cantina_administration.domain WHERE name=%s',
+                                           (url_to_redirect), 1)
+                    resp = make_response(redirect('http://'+data[0]+'/', code=302))
 
                 domain = database.select("SELECT fqdn FROM cantina_administration.domain WHERE name='main'")
-                print(domain[0][0])
-                resp.set_cookie('userID', row[1], domain=domain[0][0])
+                resp.set_cookie('token', row[1], domain=domain[0][0])
                 database.insert('''UPDATE cantina_administration.user SET last_online=%s WHERE token=%s''',
                                 (datetime.now(), row[1]))
                 return resp
@@ -37,4 +38,11 @@ def auth_cogs(ctx, database, url_to_redirect):
             return redirect(url_for("home"))
 
     elif ctx.method == 'GET':
-        return render_template('login.html')
+        if ctx.cookies.get('token'):
+            if not url_to_redirect:
+                resp = make_response(redirect(url_for('my_account')))
+            else:
+                data = database.select('SELECT fqdn FROM cantina_administration.domain WHERE name=%s',
+                                       (url_to_redirect), 1)
+                resp = make_response(redirect(data))
+        return render_template('login.html', url_to_redirect=url_to_redirect)
