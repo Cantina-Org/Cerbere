@@ -11,17 +11,29 @@
     <div class="is-vcentered is-centered">
         <div id="main">
             <h1 class="is-size-3 is-underlined">Principale</h1>
-            <p class="is-size-5">
-                Nom d'utilisateur: {{ data[2] }}<br>
-                Mots de passe: <button class="button">Modifier le mots de passe</button><br>
-                Permission d'administrateur: {% if data[5] == 1 %}Oui{% else %}Non{% endif %}<br>
-            </p>
+            <div class="is-size-5">
+                <p>Nom d'utilisateur: {{ user_data[2] }}</p>
+                <p>Mots de passe: <a href="#">Modifier le mots de passe</a></p>
+                <p>Permission d'administrateur: {% if user_data[5] == 1 %}Oui{% else %}Non{% endif %}</p>
+            </div>
         </div> <br>
         <div id="nephelees">
             <h1 class="is-size-3 is-underlined">Néphélées</h1><br>
-            <p class="is-size-5">
-                Mes fichiers sont stockés dans: {{ data[6] }}<br>
-            </p>
+            <div class="is-size-5">
+                <p>Mes fichiers sont stockés dans: {{ user_data[6] }}</p>
+                {% if folder_size == 'error' %}
+                    <p class="has-text-danger">Une erreur est survenue lors de la récupération de la taille du dossier. Le dossier existe-t-il?</p>
+                {% else: %}
+                    <p>La taille de mon dossier est de {{ folder_size }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div id="hermes">
+            <h1 class="is-size-3 is-underlined">Hermes</h1><br>
+            <div class="is-size-5">
+                <p>Nombre de message que vous avez envoyé: {{ messsage_data[1] }}</p>
+                <p>Nombre de message que vous avez reçu: {{ messsage_data[2] }}</p>
+            </div>
         </div>
     </div>
 </body>
