@@ -12,7 +12,7 @@ def auth_cogs(ctx, database, url_to_redirect):
         try:
             passwd = ctx.form['passwd']
             row = database.select(f'''SELECT password, token FROM cantina_administration.user WHERE user_name = %s''',
-                                  (user), 1)
+                                  user, 1)
             login = verify_hash_password(row[0], passwd)
         except Exception as e:
             return 'userNotFound: ' + str(e)
