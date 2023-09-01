@@ -38,7 +38,8 @@ def auth_cogs(ctx, database, url_to_redirect):
             else:
                 return 'userNotFound'
         except Exception as error:
-            make_log('Error', ctx.remote_addr, ctx.cookies.get('userID'), 2, str(error))
+            make_log('Error', ctx.remote_addr, ctx.cookies.get('token'), 2, database, argument=None,
+                     content=None)
             return redirect(url_for("home"))
 
     elif ctx.method == 'GET':
@@ -49,5 +50,7 @@ def auth_cogs(ctx, database, url_to_redirect):
                 data = database.select('SELECT fqdn FROM cantina_administration.domain WHERE name=%s',
                                        (url_to_redirect,), 1)
                 resp = make_response(redirect(data))
+
+            return resp
 
         return render_template('login.html', url_to_redirect=url_to_redirect)
