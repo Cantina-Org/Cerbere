@@ -30,16 +30,15 @@ def auth_cogs(ctx, database, url_to_redirect):
                                            (url_to_redirect,), 1)
                     resp = make_response(redirect('https://' + data[0] + '/', code=302))
 
-                domain = database.select("SELECT fqdn FROM cantina_administration.domain WHERE name='main'")
-                resp.set_cookie('token', row[1], domain=domain[0][0])
+                resp.set_cookie('token', row[1], domain=data[0])
                 database.insert('''UPDATE cantina_administration.user SET last_online=%s WHERE token=%s''',
                                 (datetime.now(), row[1]))
                 return resp
             else:
                 return 'userNotFound'
         except Exception as error:
-            make_log('Error', ctx.remote_addr, ctx.cookies.get('token'), 2, database, argument=None,
-                     content=None)
+            make_log('Cerbere-Error', ctx.remote_addr, ctx.cookies.get('token'), 2, database,
+                     argument=None, content=error)
             return redirect(url_for("home"))
 
     elif ctx.method == 'GET':
