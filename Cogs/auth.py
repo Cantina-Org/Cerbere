@@ -44,12 +44,13 @@ def auth_cogs(ctx, database, url_to_redirect):
     elif ctx.method == 'GET':
         if ctx.cookies.get('token'):
             if not url_to_redirect:
-                resp = make_response(redirect(url_for('my_account')))
+                data = database.select('''SELECT fqdn FROM cantina_administration.domain WHERE name='olympe' ''',
+                                       number_of_data=1)
             else:
                 data = database.select('SELECT fqdn FROM cantina_administration.domain WHERE name=%s',
                                        (url_to_redirect,), 1)
-                resp = make_response(redirect(data))
 
+            resp = make_response(redirect('https://' + data[0] + '/', code=302))
             return resp
 
         return render_template('login.html', url_to_redirect=url_to_redirect)
