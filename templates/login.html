@@ -9,18 +9,18 @@
 <body class="has-text-centered">
     <h1 class="is-size-1">Login</h1><br>
     <div class="columns is-vcentered is-centered" >
-    <form action="{% if url_to_redirect %}{{ url_for('auth', url_to_redirect=url_to_redirect) }}{% else %}{{ url_for('auth') }}{% endif %}" method="POST">
-        <h3 class="is-size-4">Nom d'utilisateur:</h3>
-        <label>
-            <input style="margin-bottom: 1em" class="input" type = 'text' name = 'nm' required/>
-        </label>
-        <h3 class="is-size-4">Mots de Passe:</h3>
-        <label>
-            <input style="margin-bottom: 1em" class="input" type = 'password' name = 'passwd' required/>
-        </label>
+        <form action="{% if url_to_redirect %}{{ url_for('auth', url_to_redirect=url_to_redirect) }}{% else %}{{ url_for('auth') }}{% endif %}" method="POST">
+            <h3 class="is-size-4">Nom d'utilisateur:</h3>
+            <label>
+                <input style="margin-bottom: 1em" class="input" type = 'text' name = 'nm' required/>
+            </label>
+            <h3 class="is-size-4">Mots de Passe:</h3>
+            <label>
+                <input style="margin-bottom: 1em" class="input" type = 'password' name = 'passwd' required/>
+            </label>
 
-        <button class="button is-primary" type="submit" >Se connecter</button>
-    </form>
+            <button class="button is-primary" type="submit" >Se connecter</button>
+        </form>
     </div>
 </body>
 </html>
