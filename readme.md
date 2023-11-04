@@ -1,6 +1,6 @@
 # Cerbere
 
-Cerbere est l'outils d'administration en ligne de la suite cantina
+Cerbere est le SSO (Single Sign On) de la suite cantina
 
 ### ⚠️: Installer Cerbere peut causer des problèmes sur votre machine si vous faites de mauvaises manipulations ! À vos risques et périls 😆 !
 
