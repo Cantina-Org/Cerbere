@@ -40,4 +40,12 @@ Lancer le fichier `app.py` via votre éditeur de code. (Vous devez exécuter le 
 ### Étapes 5:
 Rendez-vous sur la page `[host:port]/` pour visualiser le service.
 
-***
+*** 
+
+## Pour utiliser Cantina Cerbere en production :
+
+#### ⚠️: Cerbere est encore en développement et peut donc causer des problèmes irréversible sur votre machine (pouvant entrainer une réinstallation complète du système hôte!) si vous faites de mauvaises manipulations !
+
+L'installation de **Cerbere** en production peux être faite grâce à notre outils [**Ouranos**](https://github.com/Cantina-Org/Ouranos). 
+Pour cela, veuiller suivres les instructions donnée dans le fichier `README.md` de [**Ouranos**](https://github.com/Cantina-Org/Ouranos)
+
