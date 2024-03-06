@@ -2,6 +2,8 @@
 
 Cerbere est le SSO (Single Sign On) de la suite cantina
 
+# Ce service passera en Public Archive lorsque la nouvelle version de Olympe sera faite. Le SSO sera directement intégré dans Olympe pour plus de légerté et plus de simplicité.
+
 ### ⚠️: Installer Cerbere peut causer des problèmes sur votre machine si vous faites de mauvaises manipulations ! À vos risques et périls 😆 !
 
 ***
